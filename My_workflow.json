@@ -1,0 +1,84 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "frist-workflow",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "9462cb52-9cf8-4739-8be2-d458b9f36f6e",
+      "name": "Webhook",
+      "webhookId": "36a530e5-9333-466d-8013-725e730b9c8b"
+    },
+    {
+      "parameters": {
+        "jsCode": "const name = $input.first().json.body?.name || \"Guest\";\nreturn {\n  json: {\n    message: `Hello, ${name}! Welcome to n8n`\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        0
+      ],
+      "id": "40ab5337-f9f4-4d58-a9dc-4c266b3c9831",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        440,
+        0
+      ],
+      "id": "3e0dfdbc-45d9-45a2-b542-680e65bf3642",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "47b19d1f-6f56-4840-9acf-9d8d08d1b00e",
+  "meta": {
+    "instanceId": "01898dce01b6dce017095cfc5db4c175b75635613e26bc4bf0f0124dba00d384"
+  },
+  "id": "5vAjLGg4erjQrxcl",
+  "tags": []
+}
