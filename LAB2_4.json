@@ -1,0 +1,92 @@
+{
+  "name": "LAB2-4",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "users",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "b4c1d314-f7fa-4fb9-92f9-ae57dea8496a",
+      "name": "Webhook",
+      "webhookId": "b7561677-cab7-469b-ac29-aa35b3c3d5ec"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "projectId": "n8n-project-68-a4dfb",
+        "collection": "users",
+        "returnAll": true
+      },
+      "type": "n8n-nodes-base.googleFirebaseCloudFirestore",
+      "typeVersion": 1.1,
+      "position": [
+        220,
+        0
+      ],
+      "id": "8f401992-f475-41a1-82d7-ec10872c47f8",
+      "name": "Google Cloud Firestore",
+      "credentials": {
+        "googleFirebaseCloudFirestoreOAuth2Api": {
+          "id": "HmxkuFTPvOnjisbl",
+          "name": "Google Firebase Cloud Firestore account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        440,
+        0
+      ],
+      "id": "8f5aabb6-f533-47d7-93fd-0ae481367086",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Google Cloud Firestore",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Cloud Firestore": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "294ac11d-87a2-483e-8ecc-d9ce153491bd",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ef8f42b00f47a3c8ab6dcacc59628c9086d323c7f9f6c31de31a08bc775b8bc3"
+  },
+  "id": "YpKktrLcqt1P3j5C",
+  "tags": []
+}
